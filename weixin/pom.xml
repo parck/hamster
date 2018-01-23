@@ -32,6 +32,7 @@
             <groupId>com.github.parck</groupId>
             <artifactId>ormosia</artifactId>
             <version>0.1.2</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.reactivex.rxjava2</groupId>
