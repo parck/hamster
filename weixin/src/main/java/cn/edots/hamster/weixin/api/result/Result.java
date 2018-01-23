@@ -1,4 +1,4 @@
-package cn.edots.hamster.api.result;
+package cn.edots.hamster.weixin.api.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;

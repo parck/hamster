@@ -1,4 +1,4 @@
-package cn.edots.hamster.observer;
+package cn.edots.hamster.weixin.observer;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;

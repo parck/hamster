@@ -1,4 +1,4 @@
-package cn.edots.hamster;
+package cn.edots.hamster.weixin;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;

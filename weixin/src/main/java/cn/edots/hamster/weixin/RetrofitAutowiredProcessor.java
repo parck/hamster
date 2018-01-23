@@ -1,13 +1,12 @@
-package cn.edots.hamster;
+package cn.edots.hamster.weixin;
 
-import cn.edots.hamster.annotation.API;
-import cn.edots.hamster.annotation.Inject;
+import cn.edots.hamster.weixin.annotation.API;
+import cn.edots.hamster.weixin.annotation.Inject;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 import org.springframework.util.ReflectionUtils;
 
-import javax.annotation.Resource;
 import java.lang.reflect.Field;
 
 public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProcessorAdapter {

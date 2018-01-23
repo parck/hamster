@@ -1,4 +1,4 @@
-package cn.edots.hamster.annotation;
+package cn.edots.hamster.weixin.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

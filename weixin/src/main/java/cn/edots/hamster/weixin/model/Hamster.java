@@ -1,4 +1,4 @@
-package cn.edots.hamster.model;
+package cn.edots.hamster.weixin.model;
 
 import cn.edots.ormosia.model.Domain;
 

@@ -1,7 +1,7 @@
-package cn.edots.hamster.api;
+package cn.edots.hamster.weixin.api;
 
-import cn.edots.hamster.annotation.API;
-import cn.edots.hamster.api.result.AccessResult;
+import cn.edots.hamster.weixin.annotation.API;
+import cn.edots.hamster.weixin.api.result.AccessResult;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
