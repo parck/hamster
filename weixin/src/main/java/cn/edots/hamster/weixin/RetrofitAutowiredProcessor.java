@@ -11,12 +11,11 @@ import java.lang.reflect.Field;
 
 public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProcessorAdapter {
 
-    @Autowired
     private HamsterInitializationFactory hamsterInitializationFactory;
 
     @Override
     public boolean postProcessAfterInstantiation(final Object bean, final String beanName) throws BeansException {
-
+        if (hamsterInitializationFactory == null) hamsterInitializationFactory = new HamsterInitializationFactory();
         ReflectionUtils.doWithFields(bean.getClass(), new ReflectionUtils.FieldCallback() {
 
             public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
@@ -36,5 +35,11 @@ public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProces
         return super.postProcessAfterInstantiation(bean, beanName);
     }
 
+    public HamsterInitializationFactory getHamsterInitializationFactory() {
+        return hamsterInitializationFactory;
+    }
 
+    public void setHamsterInitializationFactory(HamsterInitializationFactory hamsterInitializationFactory) {
+        this.hamsterInitializationFactory = hamsterInitializationFactory;
+    }
 }

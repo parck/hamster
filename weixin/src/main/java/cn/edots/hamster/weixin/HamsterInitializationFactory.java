@@ -17,22 +17,23 @@ public class HamsterInitializationFactory {
     private int READ_TIME_OUT = 15;
     private int WRITE_TIME_OUT = 15;
     private int CONN_TIME_OUT = 15;
+    private String BASE_URL = "https://api.weixin.qq.com";
 
-    public HamsterInitializationFactory(String baseURL) {
+    public HamsterInitializationFactory() {
         this.apis = new HashMap<String, Object>();
         OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder()
                 .connectTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(CONN_TIME_OUT, TimeUnit.SECONDS);
         this.retrofit = new Retrofit.Builder()
-                .baseUrl(baseURL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(clientBuilder.build())
                 .build();
     }
 
-    public HamsterInitializationFactory(String baseURL, Interceptor... interceptors) {
+    public HamsterInitializationFactory(Interceptor... interceptors) {
         this.apis = new HashMap<String, Object>();
         OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder()
                 .connectTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
@@ -41,27 +42,27 @@ public class HamsterInitializationFactory {
         if (interceptors != null)
             for (Interceptor interceptor : interceptors) clientBuilder.addInterceptor(interceptor);
         this.retrofit = new Retrofit.Builder()
-                .baseUrl(baseURL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(clientBuilder.build())
                 .build();
     }
 
-    public HamsterInitializationFactory(String baseURL, OkHttpClient client) {
+    public HamsterInitializationFactory(OkHttpClient client) {
         this.apis = new HashMap<String, Object>();
         this.retrofit = new Retrofit.Builder()
-                .baseUrl(baseURL)
+                .baseUrl(BASE_URL)
                 .client(client)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 
-    public HamsterInitializationFactory(String baseURL, OkHttpClient client, retrofit2.CallAdapter.Factory factory) {
+    public HamsterInitializationFactory(OkHttpClient client, retrofit2.CallAdapter.Factory factory) {
         this.apis = new HashMap<String, Object>();
         this.retrofit = new Retrofit.Builder()
-                .baseUrl(baseURL)
+                .baseUrl(BASE_URL)
                 .client(client)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addCallAdapterFactory(factory)
@@ -98,5 +99,13 @@ public class HamsterInitializationFactory {
 
     public void setCONN_TIME_OUT(int CONN_TIME_OUT) {
         this.CONN_TIME_OUT = CONN_TIME_OUT;
+    }
+
+    public String getBASE_URL() {
+        return BASE_URL;
+    }
+
+    public void setBASE_URL(String BASE_URL) {
+        this.BASE_URL = BASE_URL;
     }
 }
