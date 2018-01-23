@@ -1,7 +1,7 @@
 package cn.edots.hamster.weixin;
 
-import cn.edots.hamster.weixin.annotation.API;
-import cn.edots.hamster.weixin.annotation.Inject;
+import cn.edots.hamster.core.annotation.API;
+import cn.edots.hamster.core.annotation.Inject;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
