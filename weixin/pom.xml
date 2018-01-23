@@ -52,6 +52,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>LATEST</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
