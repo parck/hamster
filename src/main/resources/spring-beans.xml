@@ -10,4 +10,9 @@
     <!-- 注解 -->
     <context:annotation-config/>
 
+    <bean id="retrofitProcessor" class="cn.edots.hamster.RetrofitAutowiredProcessor"/>
+
+    <bean id="hamsterInitializationFactory" class="cn.edots.hamster.HamsterInitializationFactory">
+        <constructor-arg name="baseURL" value="https://api.weixin.qq.com"/>
+    </bean>
 </beans>
