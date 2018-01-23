@@ -3,7 +3,6 @@ package cn.edots.hamster.weixin;
 import cn.edots.hamster.core.annotation.API;
 import cn.edots.hamster.core.annotation.Inject;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 import org.springframework.util.ReflectionUtils;
 
@@ -12,6 +11,13 @@ import java.lang.reflect.Field;
 public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProcessorAdapter {
 
     private HamsterInitializationFactory hamsterInitializationFactory;
+
+    public RetrofitAutowiredProcessor() {
+    }
+
+    public RetrofitAutowiredProcessor(HamsterInitializationFactory hamsterInitializationFactory) {
+        this.hamsterInitializationFactory = hamsterInitializationFactory;
+    }
 
     @Override
     public boolean postProcessAfterInstantiation(final Object bean, final String beanName) throws BeansException {
@@ -33,13 +39,5 @@ public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProces
         });
 
         return super.postProcessAfterInstantiation(bean, beanName);
-    }
-
-    public HamsterInitializationFactory getHamsterInitializationFactory() {
-        return hamsterInitializationFactory;
-    }
-
-    public void setHamsterInitializationFactory(HamsterInitializationFactory hamsterInitializationFactory) {
-        this.hamsterInitializationFactory = hamsterInitializationFactory;
     }
 }
