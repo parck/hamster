@@ -1,6 +1,6 @@
 package cn.edots.hamster.weixin.api;
 
-import cn.edots.hamster.weixin.annotation.API;
+import cn.edots.hamster.core.annotation.API;
 
 @API
 public interface StoreAPI {
