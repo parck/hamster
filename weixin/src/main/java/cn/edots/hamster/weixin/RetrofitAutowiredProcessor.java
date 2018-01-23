@@ -10,9 +10,10 @@ import java.lang.reflect.Field;
 
 public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProcessorAdapter {
 
-    private HamsterInitializationFactory hamsterInitializationFactory;
+    private final HamsterInitializationFactory hamsterInitializationFactory;
 
     public RetrofitAutowiredProcessor() {
+        this.hamsterInitializationFactory = new HamsterInitializationFactory();
     }
 
     public RetrofitAutowiredProcessor(HamsterInitializationFactory hamsterInitializationFactory) {
@@ -21,7 +22,6 @@ public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProces
 
     @Override
     public boolean postProcessAfterInstantiation(final Object bean, final String beanName) throws BeansException {
-        if (hamsterInitializationFactory == null) hamsterInitializationFactory = new HamsterInitializationFactory();
         ReflectionUtils.doWithFields(bean.getClass(), new ReflectionUtils.FieldCallback() {
 
             public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
