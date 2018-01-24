@@ -68,7 +68,7 @@ public class HamsterInitializationFactory {
                 .build();
     }
 
-    public <T extends Object> T create(Class<T> clazz) {
+    public <T extends Object> T obtain(Class<T> clazz) {
         if (apis == null || retrofit == null)
             throw new NullPointerException("HamsterInitializationFactory is not Initialization!");
         if (apis.get(clazz.getSimpleName()) != null) return (T) apis.get(clazz.getSimpleName());

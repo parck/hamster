@@ -31,7 +31,7 @@ public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProces
                 API api = field.getType().getAnnotation(API.class);
                 if (api == null) return;
                 //根据地址创建retrofit
-                Object object = hamsterInitializationFactory.create(field.getType());
+                Object object = hamsterInitializationFactory.obtain(field.getType());
                 if (object == null) return;
                 field.setAccessible(true);
                 field.set(bean, object);
