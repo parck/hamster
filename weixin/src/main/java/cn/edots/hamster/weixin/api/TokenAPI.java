@@ -17,4 +17,12 @@ public interface TokenAPI {
     @GET("/cgi-bin/token?grant_type=client_credential")
     Call<AccessResult> access(@Query("appid") String appId, @Query("secret") String secret);
 
+    /**
+     * @param appId  appId
+     * @param secret secret
+     * @return Call<AccessResult>
+     */
+    @GET("/sns/oauth2/access_token?grant_type=authorization_code")
+    Call<AccessResult> access(@Query("appid") String appId, @Query("secret") String secret, @Query("code") String code);
+
 }
