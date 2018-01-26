@@ -6,6 +6,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+import static cn.edots.hamster.weixin.Constant.host;
+
 @API
 public interface TokenAPI {
 
@@ -14,7 +16,7 @@ public interface TokenAPI {
      * @param secret secret
      * @return Call<AccessResult>
      */
-    @GET("/cgi-bin/token?grant_type=client_credential")
+    @GET(host + "/cgi-bin/token?grant_type=client_credential")
     Call<AccessResult> access(@Query("appid") String appId, @Query("secret") String secret);
 
     /**
@@ -22,7 +24,7 @@ public interface TokenAPI {
      * @param secret secret
      * @return Call<AccessResult>
      */
-    @GET("/sns/oauth2/access_token?grant_type=authorization_code")
+    @GET(host + "/sns/oauth2/access_token?grant_type=authorization_code")
     Call<AccessResult> access(@Query("appid") String appId, @Query("secret") String secret, @Query("code") String code);
 
 }

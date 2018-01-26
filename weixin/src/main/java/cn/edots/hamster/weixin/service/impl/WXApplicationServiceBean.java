@@ -30,42 +30,38 @@ public class WXApplicationServiceBean extends DomainServiceBean<Long, WXApplicat
     }
 
     @Override
-    public WXApplication get(Criterion... criterias) {
-        WXApplication application = super.get(criterias);
+    public WXApplication get(Criterion... criteria) throws Exception {
+        WXApplication application = super.get(criteria);
         application.setToken(obtainToken(application));
         return application;
     }
 
     @Override
-    public WXApplication get(Long key) {
+    public WXApplication get(Long key) throws Exception {
         WXApplication application = super.get(key);
         application.setToken(obtainToken(application));
         return application;
     }
 
     @Override
-    public WXApplication get(String key) {
+    public WXApplication get(String key) throws Exception {
         WXApplication application = super.get(key);
         application.setToken(obtainToken(application));
         return application;
     }
 
-    public String obtainToken(WXApplication application) {
+    public String obtainToken(WXApplication application) throws Exception {
         if (application == null) return null;
         if (StringUtils.isEmpty(application.getToken()) || application.getDateExpiration() == null
                 || application.getDateExpiration().getTime() < System.currentTimeMillis()) {
-            try {
-                AccessResult result = tokenAPI
-                        .access(application.getAppId(), application.getSecret())
-                        .execute()
-                        .body();
-                application.setToken(result.getToken());
-                application.setDateExpiration(new Date(System.currentTimeMillis() + result.getExpires() * 800));
-                merge(application);
-                return result.getToken();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            AccessResult result = tokenAPI
+                    .access(application.getAppId(), application.getSecret())
+                    .execute()
+                    .body();
+            application.setToken(result.getToken());
+            application.setDateExpiration(new Date(System.currentTimeMillis() + result.getExpires() * 800));
+            merge(application);
+            return result.getToken();
         }
         return application.getToken();
     }

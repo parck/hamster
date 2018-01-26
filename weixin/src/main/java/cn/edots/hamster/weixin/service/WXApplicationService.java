@@ -7,5 +7,5 @@ import java.io.IOException;
 
 public interface WXApplicationService extends DomainService<Long, WXApplication> {
 
-    String obtainToken(WXApplication application) throws IOException;
+    String obtainToken(WXApplication application) throws Exception;
 }

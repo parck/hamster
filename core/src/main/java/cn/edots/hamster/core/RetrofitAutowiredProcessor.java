@@ -1,4 +1,4 @@
-package cn.edots.hamster.weixin;
+package cn.edots.hamster.core;
 
 import cn.edots.hamster.core.annotation.API;
 import cn.edots.hamster.core.annotation.Inject;
@@ -13,7 +13,7 @@ public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProces
     private final HamsterInitializationFactory hamsterInitializationFactory;
 
     public RetrofitAutowiredProcessor() {
-        this.hamsterInitializationFactory = new HamsterInitializationFactory("https://api.weixin.qq.com");
+        this.hamsterInitializationFactory = new HamsterInitializationFactory();
     }
 
     public RetrofitAutowiredProcessor(HamsterInitializationFactory hamsterInitializationFactory) {
