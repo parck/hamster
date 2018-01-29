@@ -14,6 +14,7 @@ public class HamsterInitializationFactory {
 
     private final Retrofit retrofit;
     private final Map<String, Object> apis;
+    private final String baseURL = "https://edots.cn";
     private int READ_TIME_OUT = 15;
     private int WRITE_TIME_OUT = 15;
     private int CONN_TIME_OUT = 15;
@@ -25,7 +26,7 @@ public class HamsterInitializationFactory {
                 .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(CONN_TIME_OUT, TimeUnit.SECONDS);
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("https://")
+                .baseUrl(baseURL)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(clientBuilder.build())
@@ -41,7 +42,7 @@ public class HamsterInitializationFactory {
         if (interceptors != null)
             for (Interceptor interceptor : interceptors) clientBuilder.addInterceptor(interceptor);
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("https://")
+                .baseUrl(baseURL)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(clientBuilder.build())
@@ -51,7 +52,7 @@ public class HamsterInitializationFactory {
     public HamsterInitializationFactory(OkHttpClient client) {
         this.apis = new HashMap<String, Object>();
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("https://")
+                .baseUrl(baseURL)
                 .client(client)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -61,7 +62,7 @@ public class HamsterInitializationFactory {
     public HamsterInitializationFactory(OkHttpClient client, retrofit2.CallAdapter.Factory factory) {
         this.apis = new HashMap<String, Object>();
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("https://")
+                .baseUrl(baseURL)
                 .client(client)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addCallAdapterFactory(factory)

@@ -1,5 +1,5 @@
 package cn.edots.hamster.weixin;
 
 public interface Constant {
-    String domain = "api.weixin.qq.com";
+    String host = "https://api.weixin.qq.com";
 }
