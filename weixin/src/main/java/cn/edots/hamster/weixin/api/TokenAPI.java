@@ -16,7 +16,7 @@ public interface TokenAPI {
      * @param secret secret
      * @return Call<AccessResult>
      */
-    @GET(host + "/cgi-bin/token?grant_type=client_credential")
+    @GET("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential")
     Call<AccessResult> access(@Query("appid") String appId, @Query("secret") String secret);
 
     /**
@@ -24,7 +24,7 @@ public interface TokenAPI {
      * @param secret secret
      * @return Call<AccessResult>
      */
-    @GET(host + "/sns/oauth2/access_token?grant_type=authorization_code")
+    @GET("https://api.weixin.qq.com/sns/oauth2/access_token?grant_type=authorization_code")
     Call<AccessResult> access(@Query("appid") String appId, @Query("secret") String secret, @Query("code") String code);
 
 }
