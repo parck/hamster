@@ -5,10 +5,8 @@ import cn.edots.hamster.core.annotation.Inject;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 import org.springframework.util.ReflectionUtils;
-import retrofit2.http.GET;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProcessorAdapter {
 
@@ -28,14 +26,6 @@ public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProces
 
             public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
                 Inject inject = field.getAnnotation(Inject.class);
-                Method[] methods = inject.getClass().getMethods();
-                if (methods != null)
-                    for (Method method : methods) {
-                        GET get = method.getAnnotation(GET.class);
-                        if (get != null) {
-                            String uri = get.value();
-                        }
-                    }
                 if (inject == null) return;
                 //读取注解中的值
                 API api = field.getType().getAnnotation(API.class);
