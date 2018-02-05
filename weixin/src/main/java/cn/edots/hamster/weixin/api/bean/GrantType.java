@@ -1,4 +1,4 @@
-package cn.edots.hamster.weixin.api.param;
+package cn.edots.hamster.weixin.api.bean;
 
 public enum GrantType {
 
