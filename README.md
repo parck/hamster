@@ -15,7 +15,7 @@ controller
     @GET(produces = "application/xml;charset=UTF-8")
     public Xml test() throws IOException {
         // 获取access token
-        tokenAPI.access("wx4518a2295a11c455", "66fffa2d92de182cef37e7f85da2581f").enqueue(new Callback<AccessResult>() {
+        tokenAPI.access("wx4518a2295a11****", "66fffa2d92de182cef37e7f*********").enqueue(new Callback<AccessResult>() {
             public void onResponse(Call<AccessResult> call, Response<AccessResult> response) {
                 System.out.println(response.body());
             }
