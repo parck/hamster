@@ -2,11 +2,15 @@ package cn.edots.hamster.core;
 
 import cn.edots.hamster.core.annotation.API;
 import cn.edots.hamster.core.annotation.Inject;
+import cn.edots.hamster.core.annotation.HOST;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 import org.springframework.util.ReflectionUtils;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProcessorAdapter {
 
