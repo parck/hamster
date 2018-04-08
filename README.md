@@ -1,7 +1,7 @@
 # hamster
 By Parck.
 ## What is this ?
-一个微信API库。
+一个API库。
 ## How to use ?
 spring-applicationContext.xml
 ```
