@@ -1,7 +1,7 @@
 package cn.edots.hamster.weixin.service.impl;
 
 import cn.edots.hamster.core.annotation.Inject;
-import cn.edots.hamster.weixin.api.TokenAPI;
+import cn.edots.hamster.weixin.api.CgiBinAPI;
 import cn.edots.hamster.weixin.api.result.AccessResult;
 import cn.edots.hamster.weixin.dao.WXApplicationDAO;
 import cn.edots.hamster.weixin.model.WXApplication;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.Date;
 
 @Service("wxApplicationServiceBean")
@@ -23,7 +22,7 @@ public class WXApplicationServiceBean extends DomainServiceBean<Long, WXApplicat
     private WXApplicationDAO wxApplicationHDAO;
 
     @Inject
-    private TokenAPI tokenAPI;
+    private CgiBinAPI tokenAPI;
 
     public DomainDAO<Long, WXApplication> getEntityDAO() {
         return wxApplicationHDAO;
