@@ -2,30 +2,24 @@ package cn.edots.hamster.core;
 
 import cn.edots.hamster.core.annotation.API;
 import cn.edots.hamster.core.annotation.Inject;
-import cn.edots.hamster.core.annotation.HOST;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 import org.springframework.util.ReflectionUtils;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.logging.Logger;
 
-public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProcessorAdapter {
+public class HamsterApiAutowiredProcessor extends InstantiationAwareBeanPostProcessorAdapter {
 
-    private final HamsterInitializationFactory hamsterInitializationFactory;
+    private final HamsterApiProvider hamsterApiProvider;
 
-    public RetrofitAutowiredProcessor() {
-        this.hamsterInitializationFactory = new HamsterInitializationFactory();
+    public HamsterApiAutowiredProcessor() {
+        this.hamsterApiProvider = new HamsterApiProvider();
     }
 
-    public RetrofitAutowiredProcessor(HamsterInitializationFactory hamsterInitializationFactory) {
-        this.hamsterInitializationFactory = hamsterInitializationFactory;
+    public HamsterApiAutowiredProcessor(HamsterApiProvider hamsterApiProvider) {
+        this.hamsterApiProvider = hamsterApiProvider;
     }
 
     @Override
@@ -45,7 +39,7 @@ public class RetrofitAutowiredProcessor extends InstantiationAwareBeanPostProces
                 API api = field.getType().getAnnotation(API.class);
                 if (api == null) return;
                 //根据地址创建retrofit
-                Object object = hamsterInitializationFactory.obtain(field.getType());
+                Object object = hamsterApiProvider.obtain(field.getType());
                 if (object == null) return;
                 field.setAccessible(true);
                 field.set(bean, object);

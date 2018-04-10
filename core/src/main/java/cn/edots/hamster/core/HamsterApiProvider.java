@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class HamsterInitializationFactory {
+public class HamsterApiProvider {
 
     private final Retrofit retrofit;
     private final Map<String, Object> apis;
@@ -19,7 +19,7 @@ public class HamsterInitializationFactory {
     private int WRITE_TIME_OUT = 15;
     private int CONN_TIME_OUT = 15;
 
-    public HamsterInitializationFactory() {
+    public HamsterApiProvider() {
         this.apis = new HashMap<String, Object>();
         OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder()
                 .connectTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
@@ -33,7 +33,7 @@ public class HamsterInitializationFactory {
                 .build();
     }
 
-    public HamsterInitializationFactory(Interceptor... interceptors) {
+    public HamsterApiProvider(Interceptor... interceptors) {
         this.apis = new HashMap<String, Object>();
         OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder()
                 .connectTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
@@ -49,7 +49,7 @@ public class HamsterInitializationFactory {
                 .build();
     }
 
-    public HamsterInitializationFactory(OkHttpClient client) {
+    public HamsterApiProvider(OkHttpClient client) {
         this.apis = new HashMap<String, Object>();
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(baseURL)
@@ -59,7 +59,7 @@ public class HamsterInitializationFactory {
                 .build();
     }
 
-    public HamsterInitializationFactory(OkHttpClient client, retrofit2.CallAdapter.Factory factory) {
+    public HamsterApiProvider(OkHttpClient client, retrofit2.CallAdapter.Factory factory) {
         this.apis = new HashMap<String, Object>();
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(baseURL)
@@ -71,7 +71,7 @@ public class HamsterInitializationFactory {
 
     public <T extends Object> T obtain(Class<T> clazz) {
         if (apis == null || retrofit == null)
-            throw new NullPointerException("HamsterInitializationFactory is not Initialization!");
+            throw new NullPointerException("HamsterApiProvider is not Initialization!");
         if (apis.get(clazz.getSimpleName()) != null) return (T) apis.get(clazz.getSimpleName());
         apis.put(clazz.getSimpleName(), this.retrofit.create(clazz));
         return (T) apis.get(clazz.getSimpleName());
