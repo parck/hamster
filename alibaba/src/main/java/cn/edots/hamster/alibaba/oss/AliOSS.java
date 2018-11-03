@@ -3,10 +3,16 @@ package cn.edots.hamster.alibaba.oss;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.GeneratePresignedUrlRequest;
 import com.aliyun.oss.model.ObjectMetadata;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.auth.sts.AssumeRoleRequest;
+import com.aliyuncs.auth.sts.AssumeRoleResponse;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.http.MethodType;
+import com.aliyuncs.profile.DefaultProfile;
+import com.aliyuncs.profile.IClientProfile;
 
 import java.io.*;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.Date;
 
 public class AliOSS {
@@ -89,8 +95,7 @@ public class AliOSS {
 
         URL url = client.generatePresignedUrl(generatePresignedUrlRequest);
 
-        String resultUrl = url.toString();
-        return resultUrl;
+        return url.toString();
     }
 
     public String getBucket() {
@@ -103,5 +108,33 @@ public class AliOSS {
 
     public OSSClient getClient() {
         return client;
+    }
+
+    public STSAccessResult access(STSAccessParameter parameter) {
+        STSAccessResult result = new STSAccessResult();
+        try {
+            // 添加endpoint（直接使用STS endpoint，前两个参数留空，无需添加region ID）
+            DefaultProfile.addEndpoint("", "", "Sts", parameter.getEndpoint());
+            // 构造default profile（参数留空，无需添加region ID）
+            IClientProfile profile = DefaultProfile.getProfile("", parameter.getKey(), parameter.getSecret());
+            // 用profile构造client
+            DefaultAcsClient client = new DefaultAcsClient(profile);
+            final AssumeRoleRequest request = new AssumeRoleRequest();
+            request.setMethod(MethodType.POST);
+            request.setRoleArn(parameter.getArn());
+            request.setRoleSessionName(parameter.getName());
+            final AssumeRoleResponse response = client.getAcsResponse(request);
+            AssumeRoleResponse.Credentials credentials = response.getCredentials();
+            result.setId(response.getRequestId());
+            result.setKey(credentials.getAccessKeyId());
+            result.setSecret(credentials.getAccessKeySecret());
+            result.setToken(credentials.getSecurityToken());
+            result.setExpiration(credentials.getExpiration());
+        } catch (ClientException e) {
+            result.setId(e.getRequestId());
+            result.setErrorCode(e.getErrCode());
+            result.setErrorMessage(e.getErrMsg());
+        }
+        return result;
     }
 }
