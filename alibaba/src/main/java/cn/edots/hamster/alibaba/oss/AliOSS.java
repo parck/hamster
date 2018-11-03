@@ -152,6 +152,14 @@ public class AliOSS {
         this.secret = secret;
     }
 
+    public String getEndpoint() {
+        return endpoint;
+    }
+
+    public void setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
+    }
+
     public OSSClient getClient() {
         return client;
     }
