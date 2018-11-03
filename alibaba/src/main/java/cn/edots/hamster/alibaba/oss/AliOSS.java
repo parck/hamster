@@ -36,6 +36,9 @@ public class AliOSS {
     public static final String OSS_ME_EAST_1 = "oss-me-east-1.aliyuncs.com";
 
     protected String bucket;
+    protected String endpoint;
+    protected String key;
+    protected String secret;
     protected OSSClient client;
 
     public AliOSS(OSSClient client, String bucket) {
@@ -46,6 +49,33 @@ public class AliOSS {
     public AliOSS(String endpoint, String key, String secret, String bucket) {
         this.client = new OSSClient(endpoint, key, secret);
         this.bucket = bucket;
+        this.endpoint = endpoint;
+        this.key = key;
+    }
+
+    public STSAccessResult access(STSAccessParameter parameter) {
+        STSAccessResult result = new STSAccessResult();
+        try {
+            DefaultProfile.addEndpoint("", "", "Sts", parameter.getEndpoint());
+            IClientProfile profile = DefaultProfile.getProfile("", parameter.getKey(), parameter.getSecret());
+            DefaultAcsClient client = new DefaultAcsClient(profile);
+            final AssumeRoleRequest request = new AssumeRoleRequest();
+            request.setMethod(MethodType.POST);
+            request.setRoleArn(parameter.getArn());
+            request.setRoleSessionName(parameter.getName());
+            final AssumeRoleResponse response = client.getAcsResponse(request);
+            AssumeRoleResponse.Credentials credentials = response.getCredentials();
+            result.setId(response.getRequestId());
+            result.setKey(credentials.getAccessKeyId());
+            result.setSecret(credentials.getAccessKeySecret());
+            result.setToken(credentials.getSecurityToken());
+            result.setExpiration(credentials.getExpiration());
+        } catch (ClientException e) {
+            result.setId(e.getRequestId());
+            result.setErrorCode(e.getErrCode());
+            result.setErrorMessage(e.getErrMsg());
+        }
+        return result;
     }
 
     public String upload(String key, InputStream in) throws IOException {
@@ -106,35 +136,23 @@ public class AliOSS {
         this.bucket = bucket;
     }
 
-    public OSSClient getClient() {
-        return client;
+    public String getKey() {
+        return key;
     }
 
-    public STSAccessResult access(STSAccessParameter parameter) {
-        STSAccessResult result = new STSAccessResult();
-        try {
-            // 添加endpoint（直接使用STS endpoint，前两个参数留空，无需添加region ID）
-            DefaultProfile.addEndpoint("", "", "Sts", parameter.getEndpoint());
-            // 构造default profile（参数留空，无需添加region ID）
-            IClientProfile profile = DefaultProfile.getProfile("", parameter.getKey(), parameter.getSecret());
-            // 用profile构造client
-            DefaultAcsClient client = new DefaultAcsClient(profile);
-            final AssumeRoleRequest request = new AssumeRoleRequest();
-            request.setMethod(MethodType.POST);
-            request.setRoleArn(parameter.getArn());
-            request.setRoleSessionName(parameter.getName());
-            final AssumeRoleResponse response = client.getAcsResponse(request);
-            AssumeRoleResponse.Credentials credentials = response.getCredentials();
-            result.setId(response.getRequestId());
-            result.setKey(credentials.getAccessKeyId());
-            result.setSecret(credentials.getAccessKeySecret());
-            result.setToken(credentials.getSecurityToken());
-            result.setExpiration(credentials.getExpiration());
-        } catch (ClientException e) {
-            result.setId(e.getRequestId());
-            result.setErrorCode(e.getErrCode());
-            result.setErrorMessage(e.getErrMsg());
-        }
-        return result;
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    public OSSClient getClient() {
+        return client;
     }
 }
