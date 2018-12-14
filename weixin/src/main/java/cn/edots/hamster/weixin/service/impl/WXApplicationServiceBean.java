@@ -2,7 +2,7 @@ package cn.edots.hamster.weixin.service.impl;
 
 import cn.edots.hamster.core.annotation.Inject;
 import cn.edots.hamster.weixin.api.CgiBinAPI;
-import cn.edots.hamster.weixin.api.result.AccessResult;
+import cn.edots.hamster.weixin.api.res.TokenRes;
 import cn.edots.hamster.weixin.dao.WXApplicationDAO;
 import cn.edots.hamster.weixin.model.WXApplication;
 import cn.edots.hamster.weixin.service.WXApplicationService;
@@ -53,8 +53,8 @@ public class WXApplicationServiceBean extends DomainServiceBean<Long, WXApplicat
         if (application == null) return null;
         if (StringUtils.isEmpty(application.getToken()) || application.getDateExpiration() == null
                 || application.getDateExpiration().getTime() < System.currentTimeMillis()) {
-            AccessResult result = tokenAPI
-                    .access(application.getAppId(), application.getSecret())
+            TokenRes result = tokenAPI
+                    .token(application.getAppId(), application.getSecret())
                     .execute()
                     .body();
             application.setToken(result.getToken());

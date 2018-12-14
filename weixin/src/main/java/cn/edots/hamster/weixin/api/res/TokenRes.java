@@ -1,8 +1,13 @@
-package cn.edots.hamster.weixin.api.result;
+package cn.edots.hamster.weixin.api.res;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AccessResult extends Result {
+/**
+ * 参数	        说明
+ * access_token	获取到的凭证
+ * expires_in	凭证有效时间，单位：秒
+ */
+public class TokenRes extends Result {
 
     private String token;
     private Long expires;

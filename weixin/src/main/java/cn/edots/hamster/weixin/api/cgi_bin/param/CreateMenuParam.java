@@ -1,11 +1,11 @@
-package cn.edots.hamster.weixin.api.param;
+package cn.edots.hamster.weixin.api.cgi_bin.param;
 
 import cn.edots.hamster.weixin.api.bean.Button;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class CreateMenuParameter implements Serializable {
+public class CreateMenuParam implements Serializable {
 
     private static final long serialVersionUID = 6274695458432793648L;
 

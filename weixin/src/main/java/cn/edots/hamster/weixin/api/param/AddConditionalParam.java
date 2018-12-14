@@ -6,7 +6,7 @@ import cn.edots.hamster.weixin.api.bean.MatchRule;
 import java.io.Serializable;
 import java.util.List;
 
-public class AddConditionalParameter implements Serializable {
+public class AddConditionalParam implements Serializable {
 
     private static final long serialVersionUID = -8954315313104049757L;
 

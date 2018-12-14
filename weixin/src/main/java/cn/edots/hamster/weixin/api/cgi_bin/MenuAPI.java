@@ -1,9 +1,9 @@
-package cn.edots.hamster.weixin.api;
+package cn.edots.hamster.weixin.api.cgi_bin;
 
 import cn.edots.hamster.core.annotation.API;
-import cn.edots.hamster.weixin.api.param.CreateMenuParameter;
-import cn.edots.hamster.weixin.api.result.GetMenuResult;
-import cn.edots.hamster.weixin.api.result.Result;
+import cn.edots.hamster.weixin.api.cgi_bin.param.CreateMenuParam;
+import cn.edots.hamster.weixin.api.cgi_bin.res.GetMenuRes;
+import cn.edots.hamster.weixin.api.res.Result;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -20,7 +20,7 @@ public interface MenuAPI {
      * @return
      */
     @POST("https://api.weixin.qq.com/cgi-bin/menu/create")
-    Call<Result> create(@Query("access_token") String accessToken, @Body CreateMenuParameter parameter);
+    Call<Result> create(@Query("access_token") String accessToken, @Body CreateMenuParam parameter);
 
     /**
      * 获取菜单信息
@@ -29,7 +29,7 @@ public interface MenuAPI {
      * @return
      */
     @POST("https://api.weixin.qq.com/cgi-bin/menu/get")
-    Call<GetMenuResult> get(@Query("access_token") String accessToken);
+    Call<GetMenuRes> get(@Query("access_token") String accessToken);
 
     /**
      * 删除全部菜单

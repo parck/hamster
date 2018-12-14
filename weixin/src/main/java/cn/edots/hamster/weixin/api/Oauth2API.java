@@ -1,8 +1,8 @@
 package cn.edots.hamster.weixin.api;
 
 import cn.edots.hamster.core.annotation.API;
-import cn.edots.hamster.weixin.api.result.AccessResult;
-import cn.edots.hamster.weixin.api.result.Result;
+import cn.edots.hamster.weixin.api.res.TokenRes;
+import cn.edots.hamster.weixin.api.res.Result;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -16,10 +16,10 @@ public interface Oauth2API {
     /**
      * @param appId  appId
      * @param secret secret
-     * @return Call<AccessResult>
+     * @return Call<TokenRes>
      */
     @GET("https://api.weixin.qq.com/sns/oauth2/access_token?grant_type=authorization_code")
-    Call<AccessResult> access(@Query("appid") String appId, @Query("secret") String secret, @Query("code") String code);
+    Call<TokenRes> access(@Query("appid") String appId, @Query("secret") String secret, @Query("code") String code);
 
 }
 

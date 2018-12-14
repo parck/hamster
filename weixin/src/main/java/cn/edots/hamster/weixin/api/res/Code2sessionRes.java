@@ -1,8 +1,8 @@
-package cn.edots.hamster.weixin.api.result;
+package cn.edots.hamster.weixin.api.res;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Code2sessionResult extends Result {
+public class Code2sessionRes extends Result {
 
     private static final long serialVersionUID = 3148448726046429254L;
 

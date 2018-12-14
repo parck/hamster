@@ -1,9 +1,10 @@
-package cn.edots.hamster.weixin.api.result;
+package cn.edots.hamster.weixin.api.cgi_bin.res;
 
 import cn.edots.hamster.weixin.api.bean.ConditionalMenu;
 import cn.edots.hamster.weixin.api.bean.Menu;
+import cn.edots.hamster.weixin.api.res.Result;
 
-public class GetMenuResult extends Result {
+public class GetMenuRes extends Result {
 
     private static final long serialVersionUID = 2425246986360712083L;
 
