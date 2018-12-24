@@ -31,21 +31,24 @@ public class WXApplicationServiceBean extends DomainServiceBean<Long, WXApplicat
     @Override
     public WXApplication get(Criterion... criteria) throws Exception {
         WXApplication application = super.get(criteria);
-        application.setToken(obtainToken(application));
+        if (application == null) return null;
+        application.setToken(this.obtainToken(application));
         return application;
     }
 
     @Override
     public WXApplication get(Long key) throws Exception {
         WXApplication application = super.get(key);
-        application.setToken(obtainToken(application));
+        if (application == null) return null;
+        application.setToken(this.obtainToken(application));
         return application;
     }
 
     @Override
     public WXApplication get(String key) throws Exception {
         WXApplication application = super.get(key);
-        application.setToken(obtainToken(application));
+        if (application == null) return null;
+        application.setToken(this.obtainToken(application));
         return application;
     }
 
